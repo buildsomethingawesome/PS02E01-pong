@@ -49,7 +49,10 @@ public class PongGame extends JComponent implements ActionListener,
     public void actionPerformed(ActionEvent e) {
         ballX = ballX + ballXSpeed;
         ballY = ballY + ballYSpeed;
-        if (ballY >= 510) {
+        if (ballX + 30 >= paddleX
+                && ballX <= paddleX + 150
+                && ballY + 30 >= 510
+                && ballY <= 510 + 15) {
             ballYSpeed = -7;
         }
         if (ballX >= 800 - 30) {
