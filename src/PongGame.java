@@ -2,10 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-public class PongGame extends JComponent implements ActionListener {
+public class PongGame extends JComponent implements ActionListener,
+        MouseMotionListener {
 
     private int ballX = 400;
     private int ballY = 150;
+    private int paddleX = 0;
 
     public static void main(String[] args) {
         JFrame window = new JFrame("Pong Game by Aaron");
@@ -18,6 +20,8 @@ public class PongGame extends JComponent implements ActionListener {
 
         Timer t = new Timer(100, game);
         t.start();
+
+        window.addMouseMotionListener(game);
     }
 
     public Dimension getPreferredSize() {
@@ -32,7 +36,7 @@ public class PongGame extends JComponent implements ActionListener {
 
         // draw the paddle
         g.setColor(new Color(110, 61, 23));
-        g.fillRect(0, 510, 150, 15);
+        g.fillRect(paddleX, 510, 150, 15);
 
         // draw the ball
         g.setColor(new Color(155, 93, 169));
@@ -46,4 +50,13 @@ public class PongGame extends JComponent implements ActionListener {
         repaint();
     }
 
+    @Override
+    public void mouseDragged(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+        paddleX = e.getX() - 75;
+        repaint();
+    }
 }
