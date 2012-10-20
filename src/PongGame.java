@@ -1,7 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class PongGame extends JComponent {
+public class PongGame extends JComponent implements ActionListener {
+
+    private int ballX = 400;
+    private int ballY = 150;
 
     public static void main(String[] args) {
         JFrame window = new JFrame("Pong Game by Aaron");
@@ -11,6 +15,9 @@ public class PongGame extends JComponent {
         window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         window.setLocationRelativeTo(null);
         window.setVisible(true);
+
+        Timer t = new Timer(100, game);
+        t.start();
     }
 
     public Dimension getPreferredSize() {
@@ -29,7 +36,14 @@ public class PongGame extends JComponent {
 
         // draw the ball
         g.setColor(new Color(155, 93, 169));
-        g.fillOval(400, 150, 30, 30);
+        g.fillOval(ballX, ballY, 30, 30);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        ballX = ballX + 5;
+        ballY = ballY + 7;
+        repaint();
     }
 
 }
