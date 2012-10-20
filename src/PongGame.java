@@ -8,6 +8,8 @@ public class PongGame extends JComponent implements ActionListener,
     private int ballX = 400;
     private int ballY = 150;
     private int paddleX = 0;
+    private int ballYSpeed = 7;
+    private int ballXSpeed = 5;
 
     public static void main(String[] args) {
         JFrame window = new JFrame("Pong Game by Aaron");
@@ -45,8 +47,20 @@ public class PongGame extends JComponent implements ActionListener,
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        ballX = ballX + 5;
-        ballY = ballY + 7;
+        ballX = ballX + ballXSpeed;
+        ballY = ballY + ballYSpeed;
+        if (ballY >= 510) {
+            ballYSpeed = -7;
+        }
+        if (ballX >= 800 - 30) {
+            ballXSpeed = -5;
+        }
+        if (ballX <= 0) {
+            ballXSpeed = 5;
+        }
+        if (ballY <= 0) {
+            ballYSpeed = 7;
+        }
         repaint();
     }
 
